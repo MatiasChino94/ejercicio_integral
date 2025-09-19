@@ -6,7 +6,28 @@ namespace ejercicio_integral
     {
         static void Main(string[] args)
         {
-            
+            ComputadoraVirtual[] maquinas = new ComputadoraVirtual[4];
+
+            maquinas[0] = new ProcesoDeDatos("DataProc1", "1.0", "Linux","db_source_1", "db_dest_1");
+            maquinas[1] = new ProcesoDeDatos("DataProc2", "1.0", "Linux","db_source_2", "db_dest_2");
+            maquinas[2] = new Aplicacion("App1", "2.1", "Windows","Python", "3.10", "postgres://db1.example.com");
+            maquinas[3] = new Aplicacion("App2", "2.1", "Windows","Node.js", "18", "mongodb://db2.example.com");
+
+            Console.WriteLine("=== Levantar máquinas virtuales ===");
+            foreach(var compu in maquinas)
+            {
+                compu.levantar();
+            }
+
+
+            Console.WriteLine("\n=== Bajar todas las máquinas virtuales ===");
+            foreach (var compu in maquinas)
+            {
+                compu.bajar();
+            }
+
+            Console.WriteLine("\n=== Procesos Finalizados ===");
+
         }
 
         class ComputadoraVirtual
@@ -45,7 +66,7 @@ namespace ejercicio_integral
                 if (this.estado == "up")
                 {
                     this.estado = "down";
-                    Console.WriteLine($"{this.nombre} ha sido bajada.");
+                    Console.WriteLine($"{this.nombre} ha sido bajada, Estado: {this.estado}");
 
                 }
                 else
@@ -78,7 +99,7 @@ namespace ejercicio_integral
                 if (this.estado == "down")
                 {
                     this.estado = "up";
-                    Console.WriteLine($"Proceso {this.nombre} levantado correctamente, datos de origen almacenados:{this.datosDeOrigen}, datos de fin almacenados: {this.datosDeFin}");
+                    Console.WriteLine($"Proceso {this.nombre} levantado correctamente, datos de origen almacenados:{this.datosDeOrigen}, datos de fin almacenados: {this.datosDeFin}, Estado: {this.estado}");
                 }
                 else
                 {
